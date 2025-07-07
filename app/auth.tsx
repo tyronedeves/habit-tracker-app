@@ -1,29 +1,36 @@
-import { KeyboardAvoidingView, Platform, View, Text, StyleSheet } from "react-native";
+import { useState } from "react";
+import { KeyboardAvoidingView, Platform, View  } from "react-native";
+import {Button, Text, TextInput} from 'react-native-paper'
 
-export default function AuthScreen() {
-    return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.container}  // Added to ensure full-screen coverage
-        >
-            <View style={styles.innerContainer}>  // Added for better content positioning
-                <Text style={styles.text}>Create Account</Text>
-            </View>
-        </KeyboardAvoidingView>
-    );
+
+export default function AuthScreen( ) {
+
+    const [isSignUp, setIsDignUP] = useState<boolean>(false)
+
+    return <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : "height"}>
+        <View>
+            <Text> {isSignUp ? "Create Account testing" : "welcome Back"} </Text>
+
+           <TextInput 
+           label='Email'
+           placeholder="Email.com" 
+           autoCapitalize="none"  
+           keyboardType="email-address"
+           mode="outlined"
+            />
+             <TextInput 
+           label='Password'
+
+           autoCapitalize="none"  
+           keyboardType="email-address"
+           mode="outlined"
+            />
+            <Button mode="contained">
+               {isSignUp ? "Create Account" : "Sign In"}
+            </Button>
+            <Button mode="text" >
+              Do you already have an account? Sign In
+            </Button>
+        </View>
+    </KeyboardAvoidingView>
 }
-
-// Styles for layout and presentation
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,  // Makes KeyboardAvoidingView cover the entire screen
-    },
-    innerContainer: {
-        flex: 1,
-        justifyContent: "center",  // Centers content vertically
-        alignItems: "center",      // Centers content horizontally
-    },
-    text: {
-        fontSize: 24,  // Improves text visibility
-    },
-});
